@@ -1,6 +1,7 @@
 /* LBI cost catalog — installed-cost ranges (material + labor + sub markup)
    for a medium-to-high finish teardown/new build on Long Beach Island, NJ.
-   Baseline home: 3,500 heated SF, reversed-living, piling foundation, V/AE zone.
+   Default home: 3,800 heated SF (lump sums calibrated at 3,500 and auto-scaled),
+   reversed-living, piling foundation, V/AE zone.
    Ranges are market pricing; the builder's own sub pricing goes in "My Cost".
 
    Item fields:
@@ -12,7 +13,8 @@
      included  default toggle state (false = offered extra, off by default)
 */
 const CATALOG = {
-  baseSqft: 3500,
+  baseSqft: 3500,      // calibration base for scale:true lump sums
+  defaultSqft: 3800,   // default home size for a new project
   defaultMarkupPct: 25,
   phases: [
 
@@ -40,7 +42,7 @@ const CATALOG = {
   ]},
 
   { id: "found", code: "03", name: "Pilings & Foundation", items: [
-    { id: "piles",   name: "Timber pilings, driven", note: "CCA marine piles, 16-35 ft; typical 30-50 for 3,500 SF; count per engineer", unit: "EA", qty: 42, low: 800, high: 2000 },
+    { id: "piles",   name: "Timber pilings, driven", note: "CCA marine piles, 16-35 ft; typical 30-50 for a home this size; count per engineer", unit: "EA", qty: 44, low: 800, high: 2000 },
     { id: "pilecap", name: "Pile caps / girders / connections", note: "Carrying beams, uplift hardware, cut-offs", unit: "LS", qty: 1, low: 12000, high: 25000, scale: true },
     { id: "bwalls",  name: "Breakaway walls / enclosure below BFE", note: "V-zone breakaway or AE-zone CMU with flood vents", unit: "LS", qty: 1, low: 15000, high: 32000, scale: true },
     { id: "vents",   name: "Engineered flood vents", note: "1 sq in per sq ft enclosed, min 2 per enclosure", unit: "EA", qty: 10, low: 350, high: 550 },
@@ -52,35 +54,36 @@ const CATALOG = {
   { id: "shell", code: "04", name: "Framing & Shell",
     groups: [
       { id: "roofing", label: "Roofing selection", default: "asphalt", options: [
-        { id: "asphalt", name: "Architectural asphalt (GAF/CertainTeed)", note: "130-mph rated shingle, synthetic underlayment, ice & water", unit: "SQ", qty: 42, low: 450, high: 700 },
-        { id: "metal",   name: "Standing seam metal (aluminum)", note: "Aluminum for salt air; premium coastal look", unit: "SQ", qty: 42, low: 1100, high: 1800 },
-        { id: "mixmetal", name: "Asphalt + metal accents", note: "Shingle field with metal porch/feature roofs", unit: "SQ", qty: 42, low: 650, high: 1000 },
-        { id: "cedarroof", name: "Cedar shake roof", note: "Rare now; maintenance-heavy at the shore", unit: "SQ", qty: 42, low: 900, high: 1600 },
+        { id: "asphalt", name: "Architectural asphalt (GAF/CertainTeed)", note: "130-mph rated shingle, synthetic underlayment, ice & water", unit: "SQ", qty: 45, low: 450, high: 700 },
+        { id: "metal",   name: "Standing seam metal (aluminum)", note: "Aluminum for salt air; premium coastal look", unit: "SQ", qty: 45, low: 1100, high: 1800 },
+        { id: "mixmetal", name: "Asphalt + metal accents", note: "Shingle field with metal porch/feature roofs", unit: "SQ", qty: 45, low: 650, high: 1000 },
+        { id: "cedarroof", name: "Cedar shake roof", note: "Rare now; maintenance-heavy at the shore", unit: "SQ", qty: 45, low: 900, high: 1600 },
       ]},
       { id: "siding", label: "Siding selection", default: "cedarimp", options: [
-        { id: "vinyl",    name: "Premium vinyl (D4/D5)", note: "Entry option; least common on new high-end LBI builds", unit: "SF", qty: 4200, low: 6, high: 9 },
-        { id: "cedarimp", name: "Vinyl shake (CertainTeed Cedar Impressions)", note: "The LBI workhorse — shake look, no maintenance", unit: "SF", qty: 4200, low: 10, high: 15 },
-        { id: "hardie",   name: "Fiber cement (Hardie lap/shingle)", note: "ColorPlus, HZ5 spec; shingle profile at the high end", unit: "SF", qty: 4200, low: 11, high: 17 },
-        { id: "cedar",    name: "Natural white cedar shakes", note: "Classic shore look; weathers gray; premium labor", unit: "SF", qty: 4200, low: 12, high: 19 },
-        { id: "mixed",    name: "Mixed: shake + board & batten accents", note: "Popular current look — gables/entries in B&B", unit: "SF", qty: 4200, low: 11, high: 16 },
+        { id: "vinyl",    name: "Premium vinyl (D4/D5)", note: "Entry option; least common on new high-end LBI builds", unit: "SF", qty: 4500, low: 6, high: 9 },
+        { id: "cedarimp", name: "Vinyl shake (CertainTeed Cedar Impressions)", note: "The LBI workhorse — shake look, no maintenance", unit: "SF", qty: 4500, low: 10, high: 15 },
+        { id: "hardie",   name: "Fiber cement (Hardie lap/shingle)", note: "ColorPlus, HZ5 spec; shingle profile at the high end", unit: "SF", qty: 4500, low: 11, high: 17 },
+        { id: "nucedar",  name: "NuCedar (prefinished cellular PVC shakes)", note: "Cedar look, zero rot, factory finish; above Hardie, just under real cedar", unit: "SF", qty: 4500, low: 13, high: 19 },
+        { id: "cedar",    name: "Natural white cedar shakes", note: "Classic shore look; weathers gray; premium labor", unit: "SF", qty: 4500, low: 12, high: 19 },
+        { id: "mixed",    name: "Mixed: shake + board & batten accents", note: "Popular current look — gables/entries in B&B", unit: "SF", qty: 4500, low: 11, high: 16 },
       ]},
       { id: "decking", label: "Deck surface selection", default: "composite", options: [
-        { id: "pt",        name: "Pressure-treated decking", unit: "SF", qty: 700, low: 25, high: 35 },
-        { id: "composite", name: "Composite (Trex/TimberTech)", note: "Includes framing, fascia", unit: "SF", qty: 700, low: 40, high: 60 },
-        { id: "ipe",       name: "Ipe hardwood", note: "Top-tier look, needs oiling", unit: "SF", qty: 700, low: 55, high: 80 },
-        { id: "fbg",       name: "Fiberglass deck surfaces", note: "For rooftop/over-living-space decks", unit: "SF", qty: 700, low: 45, high: 65 },
+        { id: "pt",        name: "Pressure-treated decking", unit: "SF", qty: 750, low: 25, high: 35 },
+        { id: "composite", name: "Composite (Trex/TimberTech)", note: "Includes framing, fascia", unit: "SF", qty: 750, low: 40, high: 60 },
+        { id: "ipe",       name: "Ipe hardwood", note: "Top-tier look, needs oiling", unit: "SF", qty: 750, low: 55, high: 80 },
+        { id: "fbg",       name: "Fiberglass deck surfaces", note: "For rooftop/over-living-space decks", unit: "SF", qty: 750, low: 45, high: 65 },
       ]},
       { id: "railing", label: "Exterior railing selection", default: "cable", options: [
-        { id: "vinylrail", name: "Vinyl railing", unit: "LF", qty: 160, low: 60, high: 90 },
-        { id: "cable",     name: "Cable rail (alum/SS posts)", note: "The current LBI standard for views", unit: "LF", qty: 160, low: 130, high: 200 },
-        { id: "glassrail", name: "Glass panel railing", unit: "LF", qty: 160, low: 200, high: 320 },
-        { id: "comprail",  name: "Composite railing (Trex)", unit: "LF", qty: 160, low: 90, high: 140 },
+        { id: "vinylrail", name: "Vinyl railing", unit: "LF", qty: 170, low: 60, high: 90 },
+        { id: "cable",     name: "Cable rail (alum/SS posts)", note: "The current LBI standard for views", unit: "LF", qty: 170, low: 130, high: 200 },
+        { id: "glassrail", name: "Glass panel railing", unit: "LF", qty: 170, low: 200, high: 320 },
+        { id: "comprail",  name: "Composite railing (Trex)", unit: "LF", qty: 170, low: 90, high: 140 },
       ]},
     ],
     items: [
     { id: "lumber",  name: "Lumber / structural package", note: "Framing lumber, LVLs, trusses/rafters, Zip sheathing, hurricane hardware", unit: "LS", qty: 1, low: 60000, high: 100000, scale: true },
     { id: "framelab", name: "Framing labor", note: "Incl. setting girders on piles, strapping, sheathing", unit: "SF", sfFactor: 1, low: 18, high: 28 },
-    { id: "windows", name: "Window package (coastal-rated)", note: "Andersen 400/A-Series or Marvin, impact glass where required; ~30-38 openings", unit: "LS", qty: 1, low: 55000, high: 95000, scale: true },
+    { id: "windows", name: "Window package (coastal-rated)", note: "Andersen 400/A-Series or Marvin, impact glass where required; ~32-40 openings", unit: "LS", qty: 1, low: 55000, high: 95000, scale: true },
     { id: "extdoors", name: "Exterior doors & sliders", note: "Entry, sliders/multi-slides to decks", unit: "LS", qty: 1, low: 15000, high: 40000, scale: true },
     { id: "azek",    name: "Exterior trim package (Azek/PVC)", note: "Fascia, rakes, window/door trim, columns, brackets", unit: "LS", qty: 1, low: 18000, high: 35000, scale: true },
     { id: "gutters", name: "Gutters & leaders (aluminum)", unit: "LS", qty: 1, low: 3000, high: 6000, scale: true },
@@ -100,10 +103,10 @@ const CATALOG = {
 
   { id: "int", code: "06", name: "Interior Finishes",
     groups: [
-      { id: "flooring", label: "Main flooring selection (~2,900 SF)", default: "engwood", options: [
-        { id: "lvp",     name: "Luxury vinyl plank", note: "Waterproof; entry option for rentals", unit: "SF", qty: 2900, low: 8, high: 12 },
-        { id: "engwood", name: "Engineered hardwood (wide plank oak)", note: "The high-end LBI default", unit: "SF", qty: 2900, low: 14, high: 22 },
-        { id: "solid",   name: "Solid oak, site finished", unit: "SF", qty: 2900, low: 16, high: 25 },
+      { id: "flooring", label: "Main flooring selection (~3,150 SF)", default: "engwood", options: [
+        { id: "lvp",     name: "Luxury vinyl plank", note: "Waterproof; entry option for rentals", unit: "SF", qty: 3150, low: 8, high: 12 },
+        { id: "engwood", name: "Engineered hardwood (wide plank oak)", note: "The high-end LBI default", unit: "SF", qty: 3150, low: 14, high: 22 },
+        { id: "solid",   name: "Solid oak, site finished", unit: "SF", qty: 3150, low: 16, high: 25 },
       ]},
       { id: "cabinets", label: "Kitchen cabinetry tier", default: "semicustom", options: [
         { id: "semicustom", name: "Semi-custom (painted shaker, island)", unit: "LS", qty: 1, low: 30000, high: 50000 },

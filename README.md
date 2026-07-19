@@ -16,7 +16,7 @@ Everything runs locally; your pricing never leaves your machine.
 - **Three prices per line:** researched *Market Low* / *Market High* for the LBI area (medium-to-high finish level), and **My Cost** — your own sub/supplier number, which overrides the market figure when entered. This is how you find out where your pricing beats (or trails) the market.
 - **Actual column** for job costing a build in progress — enter invoiced amounts and compare budget vs actual, the discipline NAHB data says separates <3% variance builders from 8–15% variance builders.
 - **Markup slider** showing sale price, gross profit, and the markup↔margin conversion (25% markup = 20% margin) so you never confuse the two.
-- **Scales with square footage** — change heated SF and per-SF items plus scalable lump sums re-price automatically (3,500 SF baseline).
+- **Scales with square footage** — change heated SF and per-SF items plus scalable lump sums re-price automatically (defaults to 3,800 SF; lump sums calibrated at a 3,500 SF base).
 - **Save/Load project files** (one JSON file per job), **CSV export** for Excel, and auto-save in the browser.
 
 ## Repo layout

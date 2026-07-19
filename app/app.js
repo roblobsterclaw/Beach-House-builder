@@ -7,11 +7,13 @@
   const $$ = (sel, el) => Array.from((el || document).querySelectorAll(sel));
   const fmt = n => "$" + Math.round(n).toLocaleString("en-US");
   const LS_KEY = "lbi-builder-project-v1";
-  const BASE_SF = CATALOG.baseSqft || 3500;
+  const BASE_SF = CATALOG.baseSqft || 3500;      // calibration base for scale:true items
+  const DEFAULT_SF = CATALOG.defaultSqft || BASE_SF;
+  const DEFAULT_NAME = DEFAULT_SF.toLocaleString("en-US") + " SF LBI New Build";
 
   const defaultState = () => ({
-    projName: "3,500 SF LBI New Build",
-    sqft: BASE_SF,
+    projName: DEFAULT_NAME,
+    sqft: DEFAULT_SF,
     mode: "mid",              // low | mid | high
     markup: CATALOG.defaultMarkupPct || 25,
     items: {},                 // id -> {included, mycost, actual, qty}
@@ -20,7 +22,16 @@
   let state = load() || defaultState();
 
   function load() {
-    try { return JSON.parse(localStorage.getItem(LS_KEY)); } catch (e) { return null; }
+    try {
+      const s = JSON.parse(localStorage.getItem(LS_KEY));
+      // Saved sessions still on untouched old defaults follow the catalog's new
+      // default size; anything the user customized is left alone.
+      if (s && s.sqft === 3500 && s.projName === "3,500 SF LBI New Build" && DEFAULT_SF !== 3500) {
+        s.sqft = DEFAULT_SF;
+        s.projName = DEFAULT_NAME;
+      }
+      return s;
+    } catch (e) { return null; }
   }
   function persist() { localStorage.setItem(LS_KEY, JSON.stringify(state)); }
 
@@ -265,7 +276,7 @@
 
   // ---- toolbar ---------------------------------------------------------
   $("#projName").onchange = e => { state.projName = e.target.value; persist(); };
-  $("#sqft").onchange = e => { state.sqft = Math.max(500, +e.target.value || BASE_SF); render(); };
+  $("#sqft").onchange = e => { state.sqft = Math.max(500, +e.target.value || DEFAULT_SF); render(); };
   $$(".costmode button").forEach(b => b.onclick = () => { state.mode = b.dataset.mode; render(); });
 
   $("#btnExport").onclick = () => {
