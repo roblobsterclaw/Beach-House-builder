@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LBI Builder — Cost Tracker &amp; Estimator</title>
+<style>
+  :root {
+    --bg: #f6f8fa; --panel: #ffffff; --ink: #1c2733; --muted: #5b6b7b;
+    --line: #dde4ea; --accent: #0e6ba8; --accent-ink: #ffffff;
+    --good: #1a7f4e; --warn: #b45309; --bad: #b3261e;
+    --chip: #eaf2f8; --excluded: #f3f4f6;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 14px/1.45 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--ink); }
+  header { background: #123047; color: #fff; padding: 14px 22px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; position: sticky; top: 0; z-index: 50; box-shadow: 0 2px 8px rgba(0,0,0,.25); }
+  header h1 { font-size: 17px; margin: 0 18px 0 0; font-weight: 650; letter-spacing: .2px; }
+  header .hstat { background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.18); border-radius: 8px; padding: 5px 12px; }
+  header .hstat b { display: block; font-size: 15px; }
+  header .hstat span { font-size: 11px; opacity: .75; text-transform: uppercase; letter-spacing: .5px; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 18px 22px 80px; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-bottom: 16px; }
+  .toolbar label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); margin-bottom: 3px; }
+  .toolbar input[type=number], .toolbar input[type=text] { width: 120px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font-size: 14px; }
+  .toolbar input[type=text] { width: 220px; }
+  .btn { background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 7px; padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .btn.ghost { background: #fff; color: var(--accent); border: 1px solid var(--accent); }
+  .btn.small { padding: 4px 10px; font-size: 12px; }
+  .costmode { display: flex; gap: 0; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; }
+  .costmode button { border: 0; background: #fff; padding: 8px 12px; font-size: 12px; cursor: pointer; color: var(--muted); }
+  .costmode button.on { background: var(--accent); color: #fff; }
+  section.phase { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 14px; overflow: hidden; }
+  .phase-head { display: flex; align-items: center; gap: 10px; padding: 11px 16px; cursor: pointer; background: #eef3f7; border-bottom: 1px solid var(--line); user-select: none; }
+  .phase-head h2 { font-size: 14.5px; margin: 0; flex: 1; font-weight: 650; }
+  .phase-head .ph-total { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .phase-head .caret { transition: transform .15s; color: var(--muted); }
+  .phase.closed .caret { transform: rotate(-90deg); }
+  .phase.closed .phase-body { display: none; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .4px; color: var(--muted); padding: 7px 10px; border-bottom: 1px solid var(--line); background: #fafbfc; }
+  td { padding: 6px 10px; border-bottom: 1px solid #edf1f4; vertical-align: middle; font-variant-numeric: tabular-nums; }
+  tr.item.off td { color: #9aa6b1; background: var(--excluded); }
+  tr.item.off .money { text-decoration: line-through; opacity: .5; }
+  td.name { min-width: 230px; }
+  td.name .note { display: block; font-size: 11.5px; color: var(--muted); }
+  tr.item.off td.name .note { color: #b0b8c0; }
+  td.num, th.num { text-align: right; }
+  input.mycost, input.qty, input.actual { width: 100px; padding: 4px 6px; border: 1px solid var(--line); border-radius: 5px; text-align: right; font-size: 13px; font-variant-numeric: tabular-nums; }
+  input.qty { width: 70px; }
+  input.mycost.set { border-color: var(--good); background: #f0faf4; }
+  input.actual.set { border-color: var(--warn); background: #fff8ef; }
+  .toggle { width: 36px; height: 20px; border-radius: 999px; background: #c3ccd4; position: relative; cursor: pointer; border: 0; flex: none; }
+  .toggle.on { background: var(--good); }
+  .toggle::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: left .12s; }
+  .toggle.on::after { left: 18px; }
+  .selgroup { padding: 10px 14px 4px; border-bottom: 1px solid #edf1f4; }
+  .selgroup .sg-label { font-size: 12px; font-weight: 650; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .4px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .chip { border: 1px solid var(--line); background: var(--chip); border-radius: 999px; padding: 5px 12px; font-size: 12.5px; cursor: pointer; }
+  .chip.on { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
+  .chip .cprice { opacity: .75; font-size: 11px; margin-left: 4px; }
+  .summary { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+  .summary h2 { margin: 0 0 10px; font-size: 15px; }
+  .sumgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+  .sumcard { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+  .sumcard .k { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); }
+  .sumcard .v { font-size: 19px; font-weight: 700; margin-top: 2px; }
+  .sumcard.hi { border-color: var(--accent); background: #f2f8fc; }
+  .markup-row { display: flex; align-items: center; gap: 14px; margin-top: 12px; flex-wrap: wrap; }
+  .markup-row input[type=range] { flex: 1; min-width: 200px; }
+  .mono { font-variant-numeric: tabular-nums; }
+  .footnote { color: var(--muted); font-size: 12px; margin-top: 14px; }
+  @media (max-width: 800px) { td.name { min-width: 150px; } .wrap { padding: 10px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>LBI Builder — Cost Tracker &amp; Estimator</h1>
+  <div class="hstat"><b id="h-cost">$0</b><span>Hard + Soft Cost</span></div>
+  <div class="hstat"><b id="h-psf">$0</b><span>Cost / SF</span></div>
+  <div class="hstat"><b id="h-price">$0</b><span>Sale Price @ Markup</span></div>
+  <div class="hstat"><b id="h-profit">$0</b><span>Gross Profit</span></div>
+</header>
+<div class="wrap">
+  <div class="toolbar">
+    <div><label>Project name</label><input type="text" id="projName" value="3,500 SF LBI New Build"></div>
+    <div><label>Heated sq ft</label><input type="number" id="sqft" value="3500" step="50"></div>
+    <div><label>Cost basis</label>
+      <div class="costmode">
+        <button data-mode="low" title="Market range — low end">Mkt Low</button>
+        <button data-mode="mid" class="on" title="Midpoint of market range">Mkt Mid</button>
+        <button data-mode="high" title="Market range — high end">Mkt High</button>
+      </div>
+    </div>
+    <div style="flex:1"></div>
+    <button class="btn ghost" id="btnExport">Export CSV</button>
+    <button class="btn ghost" id="btnSave">Save Project File</button>
+    <button class="btn ghost" id="btnLoad">Open Project File</button>
+    <input type="file" id="fileLoad" accept=".json" style="display:none">
+    <button class="btn ghost" id="btnReset">Reset</button>
+  </div>
+
+  <div class="summary" id="summaryTop"></div>
+  <div id="phases"></div>
+
+  <p class="footnote">
+    Market Low/High are researched installed-cost ranges for the LBI / coastal NJ market (medium-to-high finish level).
+    <b>My Cost</b> overrides the market number when entered — that's where your contractor pricing goes.
+    <b>Actual</b> is for job-costing a build in progress (budget vs actual). Everything auto-saves in this browser;
+    use “Save Project File” to keep a permanent copy per job.
+  </p>
+</div>
+<script src="catalog.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
