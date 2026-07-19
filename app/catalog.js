@@ -46,7 +46,7 @@ const CATALOG = {
     { id: "vents",   name: "Engineered flood vents", note: "1 sq in per sq ft enclosed, min 2 per enclosure", unit: "EA", qty: 10, low: 350, high: 550 },
     { id: "slab",    name: "Ground-level slabs (garage / storage / patio)", unit: "SF", qty: 1200, low: 8, high: 14 },
     { id: "fill",    name: "Fill, backfill & rough grading", unit: "LS", qty: 1, low: 4000, high: 10000 },
-    { id: "realrule", name: "NJ REAL-rule elevation premium", note: "DEP applications filed after 7/21/2026 need +4 ft above BFE: longer piles, extra stairs/rails", unit: "LS", qty: 1, low: 15000, high: 40000, included: false },
+    { id: "realrule", name: "NJ REAL-rule elevation premium", note: "+4 ft above BFE for post-legacy filings. Legacy period expected to extend to 7/20/2027 (DEP proposal 6/1/26, adoption late summer '26; legacy standards applied in interim)", unit: "LS", qty: 1, low: 15000, high: 40000, included: false },
   ]},
 
   { id: "shell", code: "04", name: "Framing & Shell",

@@ -68,13 +68,24 @@ count from borings). AE zones (most of the island): vented enclosures, flood ven
 per sq ft of enclosure (engineered vents ~$400–$550 installed). VE zones: open pile foundation,
 breakaway walls, lowest horizontal member at/above BFE — meaningfully more expensive.
 
-**⚠ NJ REAL rules (the big 2026 variable).** NJDEP's Resilient Environments and Landscapes
-rules (adopted 1/21/2026) add **+4 ft to the flood elevation standard** for coastal new
-construction. **Applications technically complete by July 20, 2026 are grandfathered; filings
-on/after July 21, 2026 must meet the new standard** — taller pilings, more stairs, more cost.
-The app carries this as an optional "REAL-rule elevation premium" line ($15k–$40k placeholder).
-Sources: [LBT press release](https://www.longbeachtownship.com/lbts-press-release-regarding-the-nj-real-rules/),
-[Rutgers Bloustein](https://bloustein.rutgers.edu/new-jersey-finalizes-higher-elevation-standards-for-the-shore/)
+**⚠ NJ REAL rules (the big near-term variable).** NJDEP's Resilient Environments and
+Landscapes rules (adopted 1/20/2026) add **+4 ft to the flood elevation standard** for coastal
+new construction once the "legacy period" ends. Originally legacy eligibility ended
+**July 20, 2026**, but on **June 1, 2026** the Sherrill administration proposed extending the
+legacy period one year to **July 20, 2027** (virtual hearing held 7/7/2026; written comments
+close 7/31/2026; adoption anticipated late summer 2026). Critically, DEP has said it will
+**continue applying legacy provisions to eligible applications received on or after 7/20/2026
+while the amendment is pending** — so pre-REAL standards remain usable in the interim, and the
+practical deadline is expected to become July 20, 2027. Until adoption this remains a proposal;
+DEP has also floated substantive changes to the rules themselves, so re-check status before
+relying on it for a late-2026/2027 filing. The app carries the +4 ft impact as an optional
+"REAL-rule elevation premium" line ($15k–$40k placeholder).
+Sources: [NJDEP announcement 26/P026](https://dep.nj.gov/newsrel/26_0026/),
+[DEP rule proposal 6/1/2026](https://dep.nj.gov/wp-content/uploads/rules/proposals/proposal-20260601a.pdf),
+[CSG Law alert](https://www.csglaw.com/newsroom/csg-law-alert-dep-proposes-delaying-real-rule-implementation-until-july-2027/),
+[Connell Foley](https://www.connellfoley.com/blog/njdep-publishes-one-year-extension-of-real-rules),
+[NJ Monitor](https://newjerseymonitor.com/2026/05/29/nj-delays-new-flood-rules-for-further-changes/),
+[LBT press release](https://www.longbeachtownship.com/lbts-press-release-regarding-the-nj-real-rules/)
 
 **Permits.** NJ UCC fees are volume-based (LBT: $0.034/cu ft + subcode fees + DCA surcharge)
 — a full custom-home permit package commonly lands **$3k–$8k+**, not the 1–2% of job cost seen
@@ -195,5 +206,6 @@ Full source lists live in the four underlying research reports; headline sources
   flood zone, and finish level. Confirm municipal fees with each borough's construction office.
 - NAHB financial data is self-reported with a lag (FY2023 published April 2025). No audited
   margin data exists for private coastal luxury builders; Toll Brothers is the best public comp.
-- The single biggest near-term budget variable is the **REAL-rule July 21, 2026 filing
-  deadline** — anything not grandfathered gets the +4 ft standard.
+- The single biggest near-term budget variable is the **REAL-rule legacy deadline** — expected
+  to move to July 20, 2027 via the pending DEP amendment (adoption anticipated late summer
+  2026), with legacy standards applied in the interim; confirm status before each filing.
