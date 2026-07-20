@@ -112,6 +112,13 @@ const CATALOG = {
         { id: "semicustom", name: "Semi-custom (painted shaker, island)", unit: "LS", qty: 1, low: 30000, high: 50000 },
         { id: "custom",     name: "Full custom w/ pantry & bar builtins", note: "Inset doors, paint-grade custom shop", unit: "LS", qty: 1, low: 60000, high: 100000 },
       ]},
+      { id: "counters", label: "Countertop selection (kitchen + baths, ~140 SF)", default: "quartz", options: [
+        { id: "granite",   name: "Granite (mid-grade)", note: "Most affordable slab; needs periodic sealing", unit: "SF", qty: 140, low: 50, high: 90 },
+        { id: "quartz",    name: "Quartz", note: "The LBI default — nonporous, no maintenance", unit: "SF", qty: 140, low: 80, high: 120 },
+        { id: "porcelain", name: "Porcelain slab", note: "Large-format, marble looks, harder than granite, UV/heat-proof; wants an experienced fabricator", unit: "SF", qty: 140, low: 70, high: 130 },
+        { id: "quartzite", name: "Quartzite (natural)", note: "Premium exotic-slab look, harder than granite", unit: "SF", qty: 140, low: 90, high: 180 },
+        { id: "marble",    name: "Marble", note: "Classic; etches/stains — best in baths", unit: "SF", qty: 140, low: 80, high: 160 },
+      ]},
       { id: "appl", label: "Appliance package tier", default: "midhigh", options: [
         { id: "midhigh", name: "GE Café / KitchenAid / Bosch", note: "36\" range, panel-ready DW, French-door fridge", unit: "LS", qty: 1, low: 15000, high: 25000 },
         { id: "lux",     name: "Thermador / Sub-Zero & Wolf", note: "48\" range, column fridge/freezer, wine col.", unit: "LS", qty: 1, low: 35000, high: 65000 },
@@ -124,7 +131,6 @@ const CATALOG = {
     { id: "stairs",  name: "Interior stairs & railings", note: "2-3 flights (reversed living), oak treads, cable or craftsman rail", unit: "LS", qty: 1, low: 12000, high: 30000 },
     { id: "paint",   name: "Painting — full interior + exterior trim", unit: "LS", qty: 1, low: 14000, high: 26000, scale: true },
     { id: "tile",    name: "Tile — baths & backsplashes, labor + material", note: "3.5-4.5 baths, curbless master option", unit: "LS", qty: 1, low: 22000, high: 45000, scale: true },
-    { id: "counters", name: "Countertops — quartz kitchen + baths", unit: "LS", qty: 1, low: 10000, high: 22000, scale: true },
     { id: "vanities", name: "Vanities & bath cabinetry", unit: "LS", qty: 1, low: 8000, high: 20000, scale: true },
     { id: "shower",  name: "Frameless shower doors & mirrors", unit: "LS", qty: 1, low: 6000, high: 12000 },
     { id: "hardware", name: "Door hardware, bath accessories", unit: "LS", qty: 1, low: 3500, high: 8000 },
