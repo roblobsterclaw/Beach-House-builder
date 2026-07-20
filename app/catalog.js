@@ -139,6 +139,7 @@ const CATALOG = {
         { id: "pavers",  name: "Paver driveway + walks", note: "The LBI high-end standard", unit: "LS", qty: 1, low: 18000, high: 35000 },
       ]},
       { id: "pool", label: "Pool (optional)", optional: true, default: null, options: [
+        { id: "spool",   name: "Spool / plunge pool (~7x13, heated + jets)", note: "Spa-pool hybrid for tight lots; fiberglass at the low end, gunite spool at the high", unit: "LS", qty: 1, low: 35000, high: 65000 },
         { id: "fbgpool", name: "Fiberglass pool pkg (small lot ~10x20)", note: "Shell, equipment, heater, basic patio; tight-access lots add", unit: "LS", qty: 1, low: 60000, high: 100000 },
         { id: "gunite",  name: "Gunite saltwater pool pkg (~10x20)", note: "Custom shape, heated, spa-ready, premium finish — the LBI spec-sheet standard", unit: "LS", qty: 1, low: 85000, high: 150000 },
       ]},
